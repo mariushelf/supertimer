@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "supertimer"
+version = "0.1.0"
+description = "Contextmanager to print or log execution time of code blocks"
+authors = ["Marius Helf <helfsmarius@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.3"
+pre-commit = "^1.21"
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 88
+
+[build-system]
+requires = ["poetry>=1.0"]
+build-backend = "poetry.masonry.api"
