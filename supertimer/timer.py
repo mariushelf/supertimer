@@ -48,7 +48,13 @@ class timer:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.end = dt.datetime.now()
         duration = self.end - self.start
-        msg = f"{self.description} finished at {self.end} after {duration}."
+        if exc_type:
+            success_msg = f"with {exc_type.__name__}('{exc_val}')"
+        else:
+            success_msg = "successfully"
+        msg = (
+            f"{self.description} finished {success_msg} at {self.end} after {duration}."
+        )
         if self.print:
             print(msg)
         if self.loglevel is not None:

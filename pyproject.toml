@@ -1,9 +1,10 @@
 [tool.poetry]
 name = "supertimer"
-version = "0.1.0"
+version = "0.2.0"
 description = "Contextmanager to print or log execution time of code blocks"
 authors = ["Marius Helf <helfsmarius@gmail.com>"]
 license = "MIT"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.6"

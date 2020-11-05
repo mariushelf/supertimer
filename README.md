@@ -17,6 +17,15 @@ as well be *super*.
 [MIT](LICENSE)
 
 
+# Changelog
+
+## v0.2.0
+* mention success or error after execution
+
+## v0.1.0
+* First release
+
+
 # Author
 
 Marius Helf ([helfsmarius@gmail.com](mailto:helfsmarius@gmail.com))
