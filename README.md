@@ -19,6 +19,10 @@ as well be *super*.
 
 # Changelog
 
+## v0.3.0
+* convenience classes `print_timer`, `debug_timer` and `info_timer`
+* make timer function configurable
+
 ## v0.2.0
 * mention success or error after execution
 
