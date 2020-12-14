@@ -100,3 +100,22 @@ def test_timer_func(capsys):
     )
 
     assert error == ""
+
+
+def test_decorator(capsys):
+    @print_timer("Test")
+    def sleep_a_bit():
+        time.sleep(0.001)
+
+    sleep_a_bit()
+
+    cap = capsys.readouterr()
+    output = cap.out
+    error = cap.err
+
+    assert re.match(
+        r"Test starting at \d+-\d+-\d+ \d+:\d+:\d+\.\d+.\nTest finished successfully at \d+-\d+-\d+ \d+:\d+:\d+\.\d+ after \d+:\d+:\d+\.\d+\.\n",
+        output,
+    )
+
+    assert error == ""

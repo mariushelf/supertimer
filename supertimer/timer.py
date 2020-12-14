@@ -1,11 +1,12 @@
 import datetime as dt
 import logging
+from contextlib import ContextDecorator
 from typing import Callable
 
 module_logger = logging.getLogger(__name__)
 
 
-class timer:
+class timer(ContextDecorator):
     """Context manager that prints and/or logs the duration of the code block.
 
     Parameters
