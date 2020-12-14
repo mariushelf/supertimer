@@ -12,6 +12,102 @@ So I needed a new name. Inspired by my recently freshly flamed up
 love for the good old Super Nintendo, I thought that this timer could
 as well be *super*.
 
+# Usage
+
+## Use as a context manager
+
+To log the duration of a code block:
+```python
+from supertimer import timer
+import time
+
+with timer("Sleeping a bit"):
+    time.sleep(2)
+```
+This will log:
+```
+Sleeping a bit starting at 2020-12-14 18:34:54.403371
+Sleeping a bit finished successfully at 2020-12-14 18:34:56.404208 after 0:00:02.000837.
+```
+
+## Use as a decorator
+
+```python
+from supertimer import timer
+import time
+
+@timer("Sleeping a bit")
+def sleep_a_bit():
+    time.sleep(2)
+
+sleep_a_bit()
+```
+
+This will log the same message as the context manager each time
+the decorated function is called:
+```
+Sleeping a bit starting at 2020-12-14 18:34:54.403371
+Sleeping a bit finished successfully at 2020-12-14 18:34:56.404208 after 0:00:02.000837.
+```
+
+
+## Configuring the output method
+
+By default, the output is logged at loglevel `DEBUG`.
+
+The loglevel can be changed with the `loglevel` parameter. Printing to `stdout` can be
+activated by setting the `print` parameter to `True`:
+
+```python
+with timer(loglevel=logging.INFO):
+    # logging at loglevel INFO, no printing
+    ...
+    
+with timer(print=True, loglevel=None):
+    # just printing, no logging
+    ...
+```
+
+## Changing the logger
+
+The logger can be configured:
+```python
+import logging
+
+logger = logging.getLogger("my.custom.logger")
+with timer(logger=logger):
+    do_something()
+```
+
+If no logger is provided, a logger named `supertimer.timer` is used.
+
+
+## Convenience classes
+
+There are convenience classes which are preconfigured for a certain loglevel or
+just printing:
+* `print_timer`
+* `debug_timer`
+* `info_timer`
+
+
+# How time is measured
+
+By default, the start and end time are taken with `datetime.dateime.now`. The duration
+is calculated as the difference of start and end time, resulting in a 
+`datetime.timedelta` object.
+
+The timer function can be overriden:
+```python
+import timeit
+
+with timer(timer_func=timeit.default_timer):
+    ...
+```
+The `timer_func` parameter expects a callable that returns a value which supports the
+`minus` operation when called without an argument.
+
+
 # License
 
 [MIT](LICENSE)
@@ -19,14 +115,18 @@ as well be *super*.
 
 # Changelog
 
-## v0.3.0
+## 0.4.0
+* timer can now be used as a decorator
+* documentation
+
+## 0.3.0
 * convenience classes `print_timer`, `debug_timer` and `info_timer`
 * make timer function configurable
 
-## v0.2.0
+## 0.2.0
 * mention success or error after execution
 
-## v0.1.0
+## 0.1.0
 * First release
 
 
