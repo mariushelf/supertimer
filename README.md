@@ -12,6 +12,7 @@ So I needed a new name. Inspired by my recently freshly flamed up
 love for the good old Super Nintendo, I thought that this timer could
 as well be *super*.
 
+
 # Usage
 
 ## Use as a context manager
@@ -56,14 +57,15 @@ Sleeping a bit finished successfully at 2020-12-14 18:34:56.404208 after 0:00:02
 By default, the output is logged at loglevel `DEBUG`.
 
 The loglevel can be changed with the `loglevel` parameter. Printing to `stdout` can be
-activated by setting the `print` parameter to `True`:
+activated by setting the `print` parameter to `True`. Logging can be disabled by
+setting `log` to `False`:
 
 ```python
 with timer(loglevel=logging.INFO):
     # logging at loglevel INFO, no printing
     ...
     
-with timer(print=True, loglevel=None):
+with timer(print=True, log=False):
     # just printing, no logging
     ...
 ```
@@ -79,7 +81,7 @@ with timer(logger=logger):
     do_something()
 ```
 
-If no logger is provided, a logger named `supertimer.timer` is used.
+If no logger is provided, a logger named `supertimer` is used.
 
 
 ## Convenience classes
@@ -90,6 +92,24 @@ just printing:
 * `debug_timer`
 * `info_timer`
 
+## Configuring defaults
+
+All constructor arguments have a `default_.*` class attribute counterpart which
+specify defaults in case the arguments are omitted.
+
+For example, to change the default loglevel to `WARNING` one could do:
+
+```python
+timer.default_loglevel = logging.WARNING
+with timer("Sleep warning"):
+    # log timings with loglevel `WARNING`
+    time.sleep(2)
+    
+with timer("Sleep debug", loglevel=logging.DEBUG):
+    # log timings with loglevel `DEBUG`
+    time.sleep(2)
+```
+
 
 # How time is measured
 
@@ -97,7 +117,7 @@ By default, the start and end time are taken with `datetime.dateime.now`. The du
 is calculated as the difference of start and end time, resulting in a 
 `datetime.timedelta` object.
 
-The timer function can be overriden:
+The timer function can be overridden:
 ```python
 import timeit
 
@@ -117,7 +137,10 @@ The `timer_func` parameter expects a callable that returns a value which support
 
 ## 0.4.0
 * timer can now be used as a decorator
+* global default configuration
+* additional `log` parameter
 * documentation
+* change name of default logger to `supertimer`
 
 ## 0.3.0
 * convenience classes `print_timer`, `debug_timer` and `info_timer`
