@@ -11,7 +11,7 @@ from supertimer.timer import debug_timer, info_timer, print_timer
 @pytest.mark.parametrize(
     "Timer, kwargs",
     [
-        (timer, {"print": True, "loglevel": None}),
+        (timer, {"print": True, "log": False}),
         (print_timer, {}),
     ],
 )
@@ -35,6 +35,7 @@ def test_timer__print(Timer, kwargs, capsys, caplog):
 @pytest.mark.parametrize(
     "Timer,kwargs,level",
     [
+        (timer, {}, logging.DEBUG),
         (timer, dict(loglevel=logging.DEBUG), logging.DEBUG),
         (debug_timer, {}, logging.DEBUG),
         (info_timer, {}, logging.INFO),
@@ -52,6 +53,7 @@ def test_timer__logging(Timer, kwargs, level, capsys, caplog):
 
     records = caplog.records
     assert len(records) == 2
+    assert records[0].levelno == level, "logging at wrong loglevel"
     assert re.match(
         r"Test starting at \d+-\d+-\d+ \d+:\d+:\d+\.\d+.",
         records[0].msg,
@@ -71,7 +73,7 @@ def test_timer_with_exception():
 def test_print_timer():
     t = print_timer("Test")
     assert t.print == True
-    assert t.loglevel is None
+    assert t.log == False
 
 
 def test_debug_timer():
