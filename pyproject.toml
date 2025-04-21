@@ -1,31 +1,32 @@
-[tool.poetry]
+[project]
 name = "supertimer"
 version = "0.4.0"
 description = "Contextmanager to print or log execution time of code blocks"
-authors = ["Marius Helf <helfsmarius@gmail.com>"]
-license = "MIT"
+authors = [{ name = "Marius Helf", email = "helfsmarius@gmail.com" }]
+license = { text = "MIT" }
 readme = "README.md"
 classifiers = [
     "Development Status :: 4 - Beta",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Topic :: System :: Logging"
 ]
-homepage = "https://github.com/mariushelf/supertimer"
-repository = "https://github.com/mariushelf/supertimer"
-documentation = "https://github.com/mariushelf/supertimer"
+requires-python = ">=3.9"
 
-[tool.poetry.dependencies]
-python = "^3.6"
+[project.urls]
+Homepage = "https://github.com/mariushelf/supertimer"
+Repository = "https://github.com/mariushelf/supertimer"
+Documentation = "https://github.com/mariushelf/supertimer"
 
-[tool.poetry.dev-dependencies]
-pytest = "^5.3"
-pre-commit = "^1.21"
-tox = "^3.20.1"
-twine = "^3.2.0"
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.3",
+    "pre-commit>=3.6.0",
+]
 
 [tool.isort]
 multi_line_output = 3
@@ -35,5 +36,5 @@ use_parentheses = true
 line_length = 88
 
 [build-system]
-requires = ["poetry>=1.0"]
-build-backend = "poetry.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
