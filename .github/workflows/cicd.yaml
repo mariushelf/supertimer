@@ -76,7 +76,7 @@ jobs:
       - name: Check tag and version match
         run: |
           VERSION=$(uvx --from "pyproject-parser[cli]" pyproject-info project.version)
-          if [ "$VERSION" != "${{ github.ref_name }}" ]; then
+          if [ "$VERSION" != "\"${{ github.ref_name }}\"" ]; then
             echo Tag ${{ github.ref_name }} does not match package version $VERSION.
             exit 1
           else
