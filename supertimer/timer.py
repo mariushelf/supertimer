@@ -85,21 +85,21 @@ class timer(ContextDecorator):
 
 
 class print_timer(timer):
-    """ Convenience class which prints timings to stdout, but does not log. """
+    """Convenience class which prints timings to stdout, but does not log."""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, print=True, log=False, **kwargs)
 
 
 class debug_timer(timer):
-    """ Convenience class for a timer with loglevel DEBUG """
+    """Convenience class for a timer with loglevel DEBUG"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, loglevel=logging.DEBUG, **kwargs)
 
 
 class info_timer(timer):
-    """ Convenience class for a timer with loglevel INFO """
+    """Convenience class for a timer with loglevel INFO"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, loglevel=logging.INFO, **kwargs)

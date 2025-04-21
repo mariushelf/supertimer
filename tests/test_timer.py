@@ -4,6 +4,7 @@ import time
 import timeit
 
 import pytest
+
 from supertimer import timer
 from supertimer.timer import debug_timer, info_timer, print_timer
 
